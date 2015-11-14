@@ -19,7 +19,8 @@ iRobot::iRobot(std::string port){
         std::cerr << "Could not open serial port " << port << ": " << strerror(errno) << std::endl;
         if(errno == EACCES)
              std::cerr << "Run 'sudo chmod a+rw "<< port << "' in a terminal to gain access to the port.";
-        system("pause");
+        std::cout << "The execution failed. Press ENTER to continue.";
+        std::cin.get(); // Pause the system
         return;
     }
 
@@ -30,7 +31,8 @@ iRobot::iRobot(std::string port){
     result = tcgetattr(serialOutput, &settings);
     if(result == -1) {
         std::cerr << "Could not get settings from open port: " << strerror(errno) << std::endl;
-        system("pause");
+        std::cout << "The execution failed. Press ENTER to continue.";
+        std::cin.get(); // Pause the system
         return;
     }
 
@@ -45,7 +47,8 @@ iRobot::iRobot(std::string port){
     result = tcsetattr(serialOutput, TCSANOW, &settings);
     if(result == -1){
         std::cerr << "Could not set new settings: " << strerror(errno) << std::endl;
-        system("pause");
+        std::cout << "The execution failed. Press ENTER to continue.";
+        std::cin.get(); // Pause the system
         return;
     }
 
@@ -141,6 +144,5 @@ void iRobot::sendCommands(std::vector<uint8_t> commands){
     int result = write(serialOutput, &commands[0], commands.size());
     if(result == -1) {
         std::cerr << "Could not write to serial output: " << strerror(errno) << std::endl;
-        system("pause");
     }
 }
