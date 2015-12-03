@@ -1,5 +1,5 @@
 // Written by: Erick Cobos T.
-// Date: 26-Oct-2015
+// Date: 01-Dec-2015
 
 #ifndef IROBOT_H
 #define IROBOT_H
@@ -22,6 +22,9 @@ class iRobot
 
         // Gives a 90 degree turn counterclockwise
         void turnLeft();
+
+        // Gives a 180 degree turn counterclockwise.
+        void turnAround();
 
         // Advances the desired number of centimeters.
         void moveAhead(int cm);

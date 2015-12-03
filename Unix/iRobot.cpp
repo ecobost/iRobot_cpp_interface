@@ -1,5 +1,5 @@
 // Written by: Erick Cobos T
-// Date: 26-Oct-2015
+// Date: 01-Dec-2015
 
 #include "iRobot.h"
 #include <iostream>
@@ -57,7 +57,7 @@ iRobot::iRobot(std::string port){
     commands.push_back(128);
     commands.push_back(131);
     sendCommands(commands);
-    usleep(100000);
+    usleep(200000);
 }
 
 iRobot::~iRobot(){
@@ -95,6 +95,23 @@ void iRobot::turnLeft(){
     sendCommands(commands);
     stop();
 }
+
+void iRobot::turnAround(){
+    // Turns around counterclockwise
+    // Note: For our specific robot it was actually 173 degrees. It may vary for others.
+    std::vector<uint8_t> commands = std::vector<uint8_t>();
+    commands.push_back(137);
+    commands.push_back(0);
+    commands.push_back(200);
+    commands.push_back(0);
+    commands.push_back(1);
+    commands.push_back(157);
+    commands.push_back(0);
+    commands.push_back(173);
+    sendCommands(commands);
+    stop();
+}
+
 void iRobot::moveAhead(int cm){
     // Advances cm centimeters.
     std::vector<uint8_t> commands = std::vector<uint8_t>();
